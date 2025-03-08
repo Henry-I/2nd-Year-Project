@@ -1,0 +1,10 @@
+<h2>Ticket List</h2>
+<a href="{% url 'add_ticket' %}">Add Ticket</a>
+<ul>
+    {% for ticket in tickets %}
+        <li>{{ ticket.event_name }} - {{ ticket.seat_type }} - €{{ ticket.price }} 
+            <a href="{% url 'update_ticket' ticket.id %}">Edit</a>
+            <a href="{% url 'delete_ticket' ticket.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>

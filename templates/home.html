@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrowdCast Entertainment Booking</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<div class="container mt-4">
+    <!-- Hero Section -->
+    <div class="jumbotron text-center bg-light p-5 mb-4 rounded">
+        <header>
+            <header>
+                <div style="text-align: center;">
+                    <img src="{% static 'images/logo.png' %}" style="max-width: 100%; height: auto;" alt="">
+                    <h1>Welcome to the CrowdCast</h1>
+                    <p>Where we make Tickets to fit your wallet.</p>
+                </div>
+                
+            </header>
+
+        <div class="input-group mb-3" style="max-width: 500px;">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ query|default:'' }}">
+            <button class="btn btn-secondary" type="submit">Search</button>
+        </div>
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col">
+                <select class="form-select" name="category">
+                    <option value="">Event Prices</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id|stringformat:"s" == selected_category|stringformat:"s" %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <input class="form-control" type="number" step="0.01" name="min_price" placeholder="Min Price" value="{{ min_price|default:'' }}">
+            </div>
+            <div class="col">
+                <input class="form-control" type="number" step="0.01" name="max_price" placeholder="Max Price" value="{{ max_price|default:'' }}">
+            </div>
+        </div>
+    </form>
+    </div>
+
+<body>
+    <footer class="footer">
+        <p class="text-center">&copy; CrowdCast. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

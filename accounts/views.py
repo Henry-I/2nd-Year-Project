@@ -1,5 +1,6 @@
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth import login
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm, UserChangeForm
@@ -30,4 +31,4 @@ class UpdateProfileView(UpdateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
-        
+
