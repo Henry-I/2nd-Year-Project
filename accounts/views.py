@@ -37,6 +37,6 @@ class UpdateProfileView(UpdateView):
         return(response)
 
 
-class DeleteProfileVIew(View):
+class DeleteProfileView(View):
     def get(self, request):
         return render(request, 'registration/delete_profile.html')
