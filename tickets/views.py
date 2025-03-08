@@ -1,8 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Ticket
-
 from .forms import TicketForm
 
+class BuyTicketView(View):
+    def get(self, request, ticket_id):
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+
+        return render()
+    
 def home(request):
     return render(request, 'home.html')
 
@@ -21,20 +26,11 @@ def tickets(request):
     return render(request, 'tickets/ticket_list.html', {'tickets': tickets})
 
 
-def update_ticket(request, ticket_id):
-    ticket = get_object_or_404(Ticket, id=ticket_id)
-    if request.method == "POST":
-        form = TicketForm(request.POST, instance=ticket)
-        if form.is_valid():
-            form.save()
-            return redirect('ticket_list')
-    else:
-        form = TicketForm(instance=ticket)
-    return render(request, 'tickets/update_ticket.html', {'form': form})
-
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     if request.method == "POST":
         ticket.delete()
         return redirect('ticket_list')
     return render(request, 'tickets/delete_ticket.html', {'ticket': ticket})
+
+

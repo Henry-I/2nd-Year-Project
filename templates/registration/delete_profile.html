@@ -1,0 +1,16 @@
+{% extends base.html %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %} 
+    Delete profile 
+{% endblock %} 
+{% block content %}
+<div>
+    <h1>Are you sure you want to delete your account?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+</div>
+{% endblock %}
