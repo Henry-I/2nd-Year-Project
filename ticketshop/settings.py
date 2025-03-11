@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     #our apps
     'accounts',
     'tickets',
+    'cartapp'
     #3rd party apps
     'crispy_forms'
 ]
