@@ -19,7 +19,9 @@
                 </div>
                 
             </header>
-
+        <div>
+            {% include 'topnavbar.html' %}
+        </div>
         <div class="input-group mb-3" style="max-width: 500px;">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ query|default:'' }}">
             <button class="btn btn-secondary" type="submit">Search</button>

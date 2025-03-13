@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     #our apps
     'accounts',
     'tickets',
-    'cartapp'
+    'cartapp',
     #3rd party apps
-    'crispy_forms'
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = ''
 LOGOUT_REDIRECT_URL = 'accounts/login'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

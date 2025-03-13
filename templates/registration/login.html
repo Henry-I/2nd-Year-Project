@@ -1,4 +1,3 @@
-{% extends home.html %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
@@ -7,9 +6,9 @@
     <div>
         <h2>Dont have an account?</h2>
         <div>
-            <button>
-                <a href="{% url 'accounts:signup' %}">Create New Account</a>
-            </button>
+            <form action="{% url 'accounts:signup' %}" method="get">
+                <button type="submit">Sign up</button>
+            </form>
         </div>
         <h2>Have an account?</h2>
         <div>

@@ -1,18 +1,18 @@
 from django.db import models
-from tickets.models import ticket
+from tickets.models import Ticket
 
 # Create your models here.
 
 class Cart(models.Model):
     cart_ID = models.CharField(max_length=255)
-    date = models.DateField(auto_add_now=True)
+    date_added = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
 class CartItem(models.Model):
-    ticket = models.ForeignKey(ticket on_delete=Models.CASCADE)
-    cart = models.ForeignKey(Cart on_delete=Models.CASCADE)
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     
     def subtotal(self):
