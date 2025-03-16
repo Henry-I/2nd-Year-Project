@@ -7,6 +7,12 @@ from django.views import View
 def home(request):
     return render(request, 'home.html')
 
+def about(request):
+    return render(request, 'about.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
 class BuyTicketView(View):
     def get(self, request, ticket_id):
         ticket = get_object_or_404(Ticket, id=ticket_id)

@@ -1,13 +1,11 @@
-from django.views.generic.edit import CreateView, UpdateView
-from django.contrib.auth import login
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.models import Group
+from django.contrib.auth import get_user_model, login
 from django.urls import reverse_lazy
-from .forms import CustomUserCreationForm, UserChangeForm
-from .models import CustomUser
-from django.shortcuts import render
 from django.views import View
-
+from django.views.generic.edit import UpdateView, CreateView
+from .forms import UserChangeForm, CustomUserCreationForm
+from django.shortcuts import render
+from django.contrib.auth.models import Group
+from .models import CustomUser
 
 
 class SignUpView(CreateView):
@@ -23,18 +21,21 @@ class SignUpView(CreateView):
         self.object.groups.add(customer_group)
 
         login(self.request, self.object)
-        
-        return response 
+
+        return response
 
 class UpdateProfileView(UpdateView):
-    model = CustomUser
+    model = get_user_model()
     form_class = UserChangeForm
     template_name = 'registration/update_profile.html'
+    success_url = reverse_lazy('accounts:update_profile')
 
+    def get_object(self):
+        return self.request.user
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        return(response)
+        return response
 
 
 class DeleteProfileView(View):
