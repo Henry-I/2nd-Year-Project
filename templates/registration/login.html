@@ -1,24 +1,100 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div>
-    <h1>Login Page</h1>
-    <div>
-        <h2>Dont have an account?</h2>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Login Page</h1>
         <div>
-            <form action="{% url 'accounts:signup' %}" method="get">
-                <button type="submit">Sign up</button>
-            </form>
+            <h2>Don't have an account?</h2>
+            <div>
+                <form action="{% url 'accounts:signup' %}" method="get">
+                    <button type="submit">Sign up</button>
+                </form>
+            </div>
         </div>
-        <h2>Have an account?</h2>
+
         <div>
-            <form method="post">
+            <h2>Have an account?</h2>
+            <div>
                 <form method="post">
                     {% csrf_token %}
                     <p>{{ form | crispy }}</p>
                     <button type="submit">Login</button>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 {% endblock content %}
+
+{% block extra_css %}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .jumbotron {
+            background-color: #e9ecef;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .jumbotron h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .jumbotron h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .container p {
+            margin-bottom: 20px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .jumbotron h1 {
+                font-size: 2rem;
+            }
+
+            .jumbotron h2 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+{% endblock %}

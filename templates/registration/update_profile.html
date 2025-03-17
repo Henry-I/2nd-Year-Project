@@ -1,16 +1,128 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}
-    Update Profile
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/update_profile.css' %}">
+</head>
+<body>
 
-{% block content %}
-<div>
-    <form method="post">
-        {% csrf_token %}
-        <p>{{ form | crispy }}</p>
-        <button type="submit">Update</button>
-    </form>
+<div class="profile-container">
+    <div class="profile-card">
+        <h2>Update Your Profile</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                {{ form.first_name|as_crispy_field }}
+            </div>
+            <div class="form-group">
+                {{ form.last_name|as_crispy_field }}
+            </div>
+            <div class="form-group">
+                {{ form.email|as_crispy_field }}
+            </div>
+            
+            <div class="form-check">
+                {{ form.is_active }}
+                <label class="form-check-label">Active Account</label>
+            </div>
+
+            <button type="submit" class="btn-update">Update Profile</button>
+        </form>
+
+        <div class="reset-password">
+            <a href="{% url 'password_reset' %}" class="reset-link">Reset Password</a>
+        </div>
+    </div>
 </div>
-{% endblock %}
+
+</body>
+</html>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .profile-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        width: 400px;
+    }
+
+    .profile-card h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        color: #f8f9fa;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .form-check-label {
+        font-size: 0.9rem;
+    }
+
+    .btn-update {
+        background: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        width: 100%;
+    }
+
+    .btn-update:hover {
+        background: #e63e3e;
+    }
+
+    .reset-password {
+        margin-top: 15px;
+    }
+
+    .reset-link {
+        color: #ff7675;
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+    .reset-link:hover {
+        text-decoration: underline;
+    }
+
+</style>
