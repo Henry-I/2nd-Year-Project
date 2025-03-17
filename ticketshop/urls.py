@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('', include('tickets.urls')),
-    
+    path('accounts/', include('django.contrib.auth.urls')),
     
 ]
 if settings.DEBUG:

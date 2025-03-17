@@ -1,24 +1,40 @@
+{%load static%}
 <div>
-    {% if user.is_authenticated %}
-    <div>
-        Welcome, {{ user.username }}
-    </div>
-    <div>
-        <form action="{% url 'accounts:update_profile' %}" action="get">
-            <button type="submit">Manage Profile</button>
-        </form>
-    </div>
-    {% else %}
-        <div>
+    <header>
+        <nav>
+            <img src="{% static 'images/logo.png' %}" class="logo" alt="Logo" style="width: 15em; margin-right: 0%;">
+            <ul style="margin-left:0;">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+            <div class="container-fluid" style="width: 45%; margin-top: 2em; margin-left: 0%; margin-right: 0em;">
+                <form class="d-flex" action="" method="get">
+                    <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        style="border-radius: 2em; padding: 1em;">
+                    <button class="btn btn-primary" type="submit" style="border-radius: 1em; ">Search</button>
+                </form>
+            </div>
+            {% if user.is_authenticated %}
+            <div style="margin-top: 2em; display: flex;">
+                    <form action="{% url 'accounts:update_profile' %}" action="get">
+                        <button class="btn btn-primary" style="border-radius: 1em; padding: 1em; margin-right: 1em; margin-left: 1em;" type="submit">Manage Profile</button>
+                    </form>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary" style="border-radius: 1em; padding: 1em;" type="submit">Logout</button>
+                    </form>
+            </div>
+        </nav>
+        {% else %}
+        <div style="display: flex; margin-top: 2em; ">
             <form action="{% url 'accounts:signup' %}" method="get">
-                <button type="submit">Sign up</button>
+                <button type="submit" style="margin-right: 1em; margin-left: 1em;">Sign up</button>
             </form>
-        </div>
-        <div>
             <form action="{% url 'accounts:login' %}" method="get">
                 <button type="submit">Login</button>
             </form>
         </div>
-        
-    {% endif %}
+        {% endif %}
+    </header>
 </div>

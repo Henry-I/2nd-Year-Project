@@ -1,17 +1,36 @@
 from django.db import models
+import uuid
 
 # Create your models here.
-class Ticket(models.Model):
-    event_name = models.CharField(max_length=255)
-    event = models.ForeignKey('Event', on_delete=models.CASCADE, default=1)
-    seat_type = models.CharField(max_length=100)
-    ticket_type = models.CharField(max_length=100, default='Regular')
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-    date = models.DateField()
-
-    def __str__(self):
-        return f"{self.event_name} - {self.seat_type}"
+class EventType(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False)
+    name = models.CharField(max_length=250, unique=True)
     
+    def __str__(self):
+        return self.name
+
 class Event(models.Model):
-    name = models.CharField(max_length=100)
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False)
+    name = models.CharField(max_length=250, unique=True)
+    image = models.ImageField(upload_to='Event', blank=True)
+    event_type = models.ManyToManyField(EventType)
+    
+    
+    def __str__(self):
+        return self.name
+        
+
+class Ticket(models.Model):
+    event_name = models.CharField(max_length=200)
+    seat_type = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateField()
+    
+    def __str__(self):
+        return self.event_name
