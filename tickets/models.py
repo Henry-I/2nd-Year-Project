@@ -28,6 +28,7 @@ class Event(models.Model):
 
 class Ticket(models.Model):
     event_name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='Tickets', blank=True)
     event = models.ManyToManyField(Event)
     stock = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
