@@ -1,0 +1,11 @@
+<div class="navbar-dark bg-dark" style="text-align: center; padding: 1em;">
+    <ul class="d-flex justify-content-evenly" style="list-style: none; padding: 0; margin: 0;">
+        {% for eventtype in eventtype_list %}
+            <li>
+                <a class="dropdown-item text-light" href="{% url 'events_by_eventtype' eventtype.pk %}">
+                    {{ eventtype.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

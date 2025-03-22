@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Welcome to CrowdCast{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Hero Section -->
+    <div class="jumbotron text-center bg-light p-5 mb-4 rounded">
+        <header>
+            <div class="hero-images">
+                <img src="{% static 'images/comedy.png' %}" alt="Comedy Show" class="hero-image">
+                <img src="{% static 'images/concert.png' %}" alt="Concert" class="hero-image">
+                <img src="{% static 'images/sports.png' %}" alt="Sports" class="hero-image">
+            </div>
+            <div style="text-align: center;">
+                <h1 class="text-light">Welcome to the CrowdCast</h1>
+                <p>Where we make Tickets to fit your wallet.</p>
+            </div>
+        </header>
+        <div>
+        </div>
+    </div>
+</div>
+{% endblock %}

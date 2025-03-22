@@ -62,7 +62,7 @@ ROOT_URLCONF = 'ticketshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Optional: for global templates directory
+        'DIRS': [str(BASE_DIR.joinpath('accounts/templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'tickets.context_processors.eventtype_list',
+                'tickets.context_processors.event_list',
             ],
         },
     },
