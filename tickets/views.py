@@ -51,3 +51,15 @@ class EventsByEventTypeView(DetailView):
         events = Event.objects.filter(event_type=event_type)
         context['events'] = events
         return context
+
+class TicketsByEventView(DetailView):
+    model = Event
+    template_name = 'tickets_by_event.html'
+    context_object_name = 'event'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event = self.object
+        tickets = Ticket.objects.filter(event=event)
+        context['tickets'] = tickets
+        return context

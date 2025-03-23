@@ -1,15 +1,10 @@
 {% for event in events %}
 {% if event.image %}
-<a href="">
+<a href="{% url 'tickets_by_event' event.id %}">
     <img src="{{ event.image.url }}" alt="" class="img-fluid rounded-top" style="height: 400px; width: 800px;">
 </a>
 {% endif %}
-{% if event.image %}
-<a href="">
-    <img src="{{ event.image.url }}" alt="" class="img-fluid rounded-top" style="height: 400px; width: 800px;">
-</a>
-{% endif %}
-<a href="" class="text-dark text-decoration-none">
+<a href="{% url 'tickets_by_event' event.id %}" class="text-dark text-decoration-none">
     {{ event.name }}
 </a>
 {% endfor %}

@@ -1,0 +1,10 @@
+{% for ticket in tickets %}
+{% if ticket.image %}
+<a href="">
+    <img src="{{ ticket.image.url }}" alt="" class="img-fluid rounded-top" style="height: 400px; width: 800px;">
+</a>
+{% endif %}
+<a href="" class="text-dark text-decoration-none">
+    {{ ticket.event_name }}
+</a>
+{% endfor %}
