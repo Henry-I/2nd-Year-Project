@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Shopping Cart
+{% endblock %}
+{% block content %}
+    {% if not cart_items %}
+        <div>
+            <h1>Your cart is empty!</h1>
+        </div>
+     {% else %}
+        <div>
+            <h1>Your Cart</h1>
+        </div>
+        <div>
+            <h2>Your Items:</h2>
+        </div>
+        <div>
+            {% for cart_items in cart_items %}
+                <div>
+                    {{cart_item.ticket.event_name}}
+                    Price: {{cart_item.ticket.price}}
+                    Tickets: {{cart_item.quantity}} x €{{cart_item.ticket.price}}
+                </div>
+                {% if cart_item.quantity < cart_item.ticket.stock %}
+                    <div>
+
+                    </div>
+                {% else %}
+                    <div>
+
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <h1>Checkout</h1>
+        </div>
+        <div>
+            Total: €{{total}}
+        </div>
+    {% endif %}
+{% endblock %}
