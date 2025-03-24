@@ -63,3 +63,7 @@ class TicketsByEventView(DetailView):
         tickets = Ticket.objects.filter(event=event)
         context['tickets'] = tickets
         return context
+   
+
+
+
