@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from tickets.models import Ticket
 from .models import Cart, CartItem
@@ -15,9 +15,9 @@ def cart_id_(request):
 def CartAdd(request, ticket_id):
     ticket = Ticket.objects.get(id=ticket_id)
     try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
+        cart = Cart.objects.get(cart_ID=_cart_ID(request))
     except Cart.DoesNotExist:
-        cart = Cart.objects.create(cart_id=_cart_id(request))
+        cart = Cart.objects.create(cart_ID=_cart_ID(request))
         cart.save()
     try:
         cart_item = CartItem.objects.get(ticket=ticket, cart=cart)
@@ -30,7 +30,7 @@ def CartAdd(request, ticket_id):
 
 def cart_detail(request, total=0, counter=0, cart_items = None):
     try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
+        cart = Cart.objects.get(cart_ID=_cart_ID(request))
         cart_items = CartItem.objects.filter(cart=cart, active=True)
         for cart_item in cart_items:
             total += (cart_item.price * cart_item.quantity)
@@ -42,3 +42,26 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
     'total':total,
     'counter':counter
     })    
+
+def cart_remove(request, ticket_id):
+    cart = Cart.objects.get(cart_ID=cart_ID(request))
+    product = get_object_or_404(Ticket, id=ticket_id)
+    cart_item = CartItem.objects.get(ticket=ticket, cart=cart)
+
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+
+    else:
+        cart_item.delete()
+
+    return redirect('cartapp:cart_detail')
+
+def empty_cart(request, product_id):
+    cart = Cart.objects.get(cart_ID=cart_ID(request))
+    product = get_object_or_404(Ticket, id=ticket_id)
+    cart_item = CartItem.objects.get(ticket=ticket, cart=cart)
+
+    cart_item.delete()
+
+    return redirect('cartapp:cart_detail')

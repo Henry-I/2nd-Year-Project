@@ -24,6 +24,16 @@
                         {% csrf_token %}
                         <button class="btn btn-primary" style="border-radius: 1em; padding: 1em;" type="submit">Logout</button>
                     </form>
+                    <form method="post" action="{% url 'cartapp:cart_detail' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary" style="border-radius: 1em; padding: 1em;" type="submit">Cart</button>
+                    </form>
+                    {% if item_count > 0 %}
+                        <form method="post" action="{% url 'cartapp:cart_detail' %}">
+                            {% csrf_token %}
+                            <button class="btn btn-primary" style="border-radius: 1em; padding: 1em;" type="submit">{{item_count}}</button>
+                        </form>
+                    {% endif %}
             </div>
         </nav>
         {% else %}

@@ -24,11 +24,15 @@
                 </div>
                 {% if cart_item.quantity < cart_item.ticket.stock %}
                     <div>
-
+                        Unfortunately, the ticket quantity you have requested is currently unavailable
+                        <button class=""><a href="{% url 'cart:cart_remove' cart_item.ticket.id %}"></a>Remove ticket</button>
+                        <button class=""><a href="{% url 'cart:empty_cart' cart_item.ticket.id %}"></a>Empty Cart</button>
                     </div>
                 {% else %}
                     <div>
-
+                        <button class=""><a href="{% url 'cart:add_cart' cart_item.ticket.id %}"></a>Add ticket</button>
+                        <button class=""><a href="{% url 'cart:cart_remove' cart_item.ticket.id %}"></a>Remove ticket</button>
+                        <button class=""><a href="{% url 'cart:empty_cart' cart_item.ticket.id %}"></a>Empty cart</button>
                     </div>
                 {% endif %}
             {% endfor %}

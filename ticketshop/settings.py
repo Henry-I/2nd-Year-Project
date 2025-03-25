@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middleware.no_cache.NoCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'ticketshop.urls'
@@ -73,6 +74,7 @@ TEMPLATES = [
                 'tickets.context_processors.eventtype_list',
                 'tickets.context_processors.event_list',
                 'tickets.context_processors.ticket_list',
+                'cartapp.context_processors.counter'
             ],
         },
     },
