@@ -10,7 +10,7 @@
                 <li><a href="{% url 'ticket_list' %}"><i class="bi bi-bag"></i></a></li>
             </ul>
             <div class="container-fluid" style="width: 55%; margin-left: 0%; margin-right: 0em;">
-                <form class="d-flex" action="" method="get">
+                <form class="d-flex" action="{% url 'search_app:searchResult' %}" method="get">
                     <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search"
                         style="border-radius: 2em; height: 3em;  margin-top: 2.5em;">
                     <ul>

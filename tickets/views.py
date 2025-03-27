@@ -3,6 +3,8 @@ from .models import Ticket, Event, EventType
 from django.views import View
 from django.views.generic import ListView, DetailView
 
+
+
 class TicketDetailView(DetailView):
     model = Ticket
     template_name = 'ticket_detail.html'
@@ -29,7 +31,7 @@ class TicketPageView(ListView):
     model = Ticket
     template_name = 'tickets.html'  
     context_object_name = 'ticket_list'
-
+    paginate_by = 2
 
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
