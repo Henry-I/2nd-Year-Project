@@ -67,7 +67,7 @@
                                 </tr>
                             {% endfor %}
                         </tbody>
-                    </table>
+                    </table> 
                 </div>
                 <div class="col-lg-4">
                     <div class="card shadow">
@@ -75,6 +75,24 @@
                             <h5 class="card-title">Checkout</h5>
                             <p class="lead">Total: <strong>€{{ total }}</strong></p>
                             <a href="{% url 'ticket_list' %}" class="btn btn-secondary btn-lg w-100">Continue Shopping</a>
+                            <div>
+                                <form action="" method="POST"> 
+                                    {% csrf_token %} 
+                                     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" 
+                                       data-key="{{ data_key }}" 
+                                       data-amount="{{ stripe_total }}" 
+                                       data-name="Crowdcast Bookings" 
+                                       data-description="{{ description }}" 
+                                       data-image="{% static 'images/logo.png' %}" 
+                                       data-locale="auto" 
+                                       data-currency="eur" 
+                                       data-shipping-address="true" 
+                                       data-billing-address="true" 
+                                       data-zip-code="true"> 
+                                      </script> 
+                                </form> 
+                            </div>
+                            </form> 
                         </div>
                     </div>
                 </div>

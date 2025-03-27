@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     #3rd party apps
     'crispy_forms',
     'crispy_bootstrap5',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,6 @@ LOGOUT_REDIRECT_URL = 'home'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+STRIPE_SECRET_KEY = 'sk_test_51R7CKGGCQytJIdhGIj7JtUjajWMZ8iChuejhZlod7xZa9f8Tb7XEuXzxWnwHlYrDDlzHVv5vBrprvzNY37WixKMv008peL8cnp'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51R7CKGGCQytJIdhGQ8AQPOX9vK7FuaxPQbntAfbjIoRjeCY3XbrUhfzZfCQb3prWqooK1Fiz4IFl2HjECVdK5OsM009q6CWkrH'
