@@ -74,7 +74,7 @@ TEMPLATES = [
                 'tickets.context_processors.eventtype_list',
                 'tickets.context_processors.event_list',
                 'tickets.context_processors.ticket_list',
-                'cartapp.context_processors.counter'
+                'cartapp.context_processors.counter',
             ],
         },
     },

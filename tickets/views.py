@@ -3,8 +3,9 @@ from .models import Ticket, Event, EventType
 from django.views import View
 from django.views.generic import ListView, DetailView
 
-
-
+class TicketDetailView(DetailView):
+    model = Ticket
+    template_name = 'ticket_detail.html'
     
 def home(request):
     return render(request, 'home.html')
@@ -24,9 +25,10 @@ class BuyTicketView(View):
 def add_ticket(request):
     return render(request, 'tickets/add_ticket.html')
 
-def tickets(request):
-    tickets = Ticket.objects.all()
-    return render(request, 'tickets/ticket_list.html', {'tickets': tickets})
+class TicketPageView(ListView):
+    model = Ticket
+    template_name = 'tickets.html'  
+    context_object_name = 'ticket_list'
 
 
 def delete_ticket(request, ticket_id):
