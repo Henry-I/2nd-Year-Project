@@ -49,14 +49,36 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
         try: 
             token = request.POST['stripeToken']
             email = request.POST['stripeEmail']
+            if not token or not email:
+                return HttpResponse("Missing token")
+                
             customer = stripe.Customer.create(email=email,
             source=token)
             stripe.Charge.create(amount=stripe_total,
             currency="eur",
             description=description,
             customer=customer.id)
+
         except stripe.error.CardError as e:
-            return e
+            return render(request, 'cart.html', {
+            'cart_items': cart_items,
+            'total': total,
+            'counter': counter,
+            'data_key': data_key,
+            'stripe_total': stripe_total,
+            'description': description,
+            'error_message': str(e)  # Display error to user
+        })
+        
+
+    return render(request, 'cart.html', 
+                    {'cart_items':cart_items, 
+                    'total':total, 
+                    'counter':counter,
+                    'data_key':data_key,
+                    'stripe_total':stripe_total,
+                    'description':description,
+                    })
         
 
     return render(request, 'cart.html', 
