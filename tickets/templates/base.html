@@ -13,11 +13,10 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+            background: linear-gradient(to bottom right, #1b1b3a, #16213e); /* Darker and richer */
             margin: 0;
             padding: 0;
-            color: #333;
-
+            color: #fff;
         }
 
         header {
@@ -204,6 +203,17 @@
             top: 0;
             z-index: 1000;
             max-height: 200px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">

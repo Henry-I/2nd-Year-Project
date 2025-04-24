@@ -4,22 +4,64 @@
 {% block title %}Welcome to CrowdCast{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <!-- Hero Section -->
-    <div class="jumbotron text-center bg-light p-5 mb-4 rounded">
-        <header>
-            <div class="hero-images">
-                <img src="{% static 'images/comedy.png' %}" alt="Comedy Show" class="hero-image">
-                <img src="{% static 'images/concert.png' %}" alt="Concert" class="hero-image">
-                <img src="{% static 'images/sports.png' %}" alt="Sports" class="hero-image">
+<div class="container mt-5">
+    <!-- Hero Carousel -->
+    <div class="mb-5">
+        <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for ticket in tickets %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <a href="{% url 'ticket_detail' ticket.id %}">
+                            <img src="{{ ticket.image.url }}" class="d-block w-100 rounded" style="height: 450px; object-fit: cover;" alt="{{ ticket.event_name }}">
+                        </a>
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                            <h5 class="text-white">{{ ticket.event_name }}</h5>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <div style="text-align: center;">
-                <h1 class="text-light">Welcome to the CrowdCast</h1>
-                <p>Where we make Tickets to fit your wallet.</p>
-            </div>
-        </header>
-        <div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
+
+    <!-- Welcome Text -->
+    <div class="text-center text-light mb-5">
+        <h1 class="display-4 fw-bold">Welcome to CrowdCast</h1>
+        <p class="lead">Where we make tickets to fit your wallet. Discover, book, and enjoy entertainment like never before.</p>
+    </div>
+
+    <!-- Featured Events -->
+    <section class="mb-5">
+        <h2 class="text-center text-white mb-4">🎤 Featured Events</h2>
+        <div class="row">
+            {% for ticket in tickets|slice:":3" %}
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-white shadow-sm h-100">
+                    <img src="{{ ticket.image.url }}" class="card-img-top" style="height: 220px; object-fit: cover;" alt="{{ ticket.event_name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ticket.event_name }}</h5>
+                        <p class="card-text">{{ ticket.description|truncatewords:20 }}</p>
+                        <a href="{% url 'ticket_detail' ticket.id %}" class="btn btn-primary mt-2">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="text-center py-5" style="background: linear-gradient(to right, #007bff, #6610f2); border-radius: 15px;">
+        <h2 class="text-white mb-3">Don't Miss Out!</h2>
+        <p class="text-light">Sign up today to get exclusive deals and early access to popular events.</p>
+        <a href="{% url 'accounts:register' %}" class="btn btn-light btn-lg mt-2">Join Now</a>
+    </section>
 </div>
 {% endblock %}
+

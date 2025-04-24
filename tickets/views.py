@@ -17,7 +17,9 @@ class TicketDetailView(DetailView):
         return context
 
 def home(request):
-    return render(request, 'home.html')
+    tickets = Ticket.objects.all()[:5]
+    return render(request, 'home.html', {'tickets': tickets})
+
 
 def about(request):
     return render(request, 'about.html')
