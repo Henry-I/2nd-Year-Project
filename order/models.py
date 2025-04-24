@@ -22,20 +22,6 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
-class BookingDetails(models.Model):
-    f_name= models.CharField(max_length=250, blank=True, verbose_name='First Name')
-    l_name= models.CharField(max_length=250, blank=True, verbose_name='Last Name')
-    email= models.EmailField(max_length=250, blank=True, verbose_name='Email Address')
-    phone= models.PositiveIntegerField (blank=True, verbose_name='Phone Number')
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='booking_details')
-    ticket_type = models.CharField(max_length=250, blank=True, verbose_name='Ticket Type')
-    row = models.CharField(max_length=250, blank=True, verbose_name='Row')
-    seat = models.PositiveIntegerField(blank=True, verbose_name='Seat')
-
-
-    def __str__(self):
-        return str(self.f_name) + ' ' + str(self.l_name)
-
 
 class OrderItem(models.Model):
     product = models.CharField(max_length=250)

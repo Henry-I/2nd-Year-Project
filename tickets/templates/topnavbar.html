@@ -13,14 +13,14 @@
                 <form class="d-flex" action="{% url 'search_app:searchResult' %}" method="get">
                     <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search"
                         style="border-radius: 2em; height: 3em;  margin-top: 2.5em;">
-                    <ul>
-                        <li><a href=""><i class="bi bi-search"></i></a></li>
-                    </ul>
+                    <button class="btn btn-outline-light" type="submit" style="border-radius: 2em; margin-left: 0.5%; height: 3em; margin-top: 2.5em; background-color: #f8f9fa; color: #212529;">
+                        <i class="bi bi-search"></i>
                 </form>
             </div>
             <ul style="margin-right: 0%;">
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'cartapp:cart_detail' %}"><i class="bi bi-cart"></i>{% if item_count > 0 %} ({{ item_count }}){% endif%}</a></li>
+                <li><a href="{% url 'order:order_history' %}"><i class="bi bi-file-earmark-text"></i></a></li>
                 <li><a href="{% url 'accounts:update_profile' %}"><i class="bi bi-person"></i></a></li>
                 <li style="margin-top: 1.5%;">
                     <form method="post" action="{% url 'logout' %}" style="display: inline;">

@@ -2,13 +2,20 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Ticket, Event, EventType
 from django.views import View
 from django.views.generic import ListView, DetailView
-
+from .forms import BookingDetailsForm
+from order.models import Order
 
 
 class TicketDetailView(DetailView):
     model = Ticket
     template_name = 'ticket_detail.html'
-    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        order = Order.objects.filter(emailAddress=self.request.user.email).first()  
+        context['order'] = order
+        return context
+
 def home(request):
     return render(request, 'home.html')
 
@@ -69,5 +76,14 @@ class TicketsByEventView(DetailView):
         return context
    
 
-
+def ticket_checkout(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    if request.method == 'POST':
+        form = BookingDetailsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cartapp:add_cart', ticket_id=ticket.id)
+    else:
+        form = BookingDetailsForm()
+    return render(request, 'ticket_checkout.html', {'form': form})
 

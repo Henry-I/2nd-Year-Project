@@ -27,9 +27,11 @@
                     {% if ticket.stock == 0 %}
                         <span class="badge bg-danger fs-6">Out of Stock</span>
                     {% else %}
-                        <a href="{% url 'cartapp:add_cart' ticket.id %}" class="btn btn-primary w-100">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </a>
+                    
+                    <a href="{% url 'ticket_checkout' ticket.id %}" class="btn btn-primary w-100">
+                        <i class="fas fa-shopping-cart"></i> Continue
+                    </a>
+                    
                     {% endif %}
                 </div>
             </div>

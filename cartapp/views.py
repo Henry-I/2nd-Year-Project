@@ -1,12 +1,11 @@
 from django.shortcuts import redirect, render, get_object_or_404, reverse
-from tickets.models import Ticket
+from tickets.models import Ticket, BookingDetails
 from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 import stripe
 from order.models import Order, OrderItem
 from stripe import StripeError
-
 
 def _cart_id(request):
     cart = request.session.session_key
@@ -80,11 +79,11 @@ def cart_detail(request, total=0, counter=0, cart_items = None):
                 'counter': counter,
                 'error': str(e),  # Display error if there's an issue with Stripe
             })
-
     return render(request, 'cart.html', {
         'cart_items': cart_items,
         'total': total,
         'counter': counter,
+
     })
 
 

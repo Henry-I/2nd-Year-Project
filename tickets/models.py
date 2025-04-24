@@ -37,3 +37,21 @@ class Ticket(models.Model):
     def __str__(self):
         return self.event_name
 
+class BookingDetails(models.Model):
+    TICKET_TYPES = [
+        ('standard', 'Standard'),
+        ('vip', 'VIP'),
+        ('student', 'Student'),
+    ]
+
+    f_name= models.CharField(max_length=250, blank=True, verbose_name='First Name')
+    l_name= models.CharField(max_length=250, blank=True, verbose_name='Last Name')
+    email= models.EmailField(max_length=250, blank=True, verbose_name='Email Address')
+    phone= models.PositiveIntegerField (blank=True, verbose_name='Phone Number')
+    ticket_type = models.CharField(max_length=10, choices=TICKET_TYPES)
+    row = models.CharField(max_length=250, blank=True, verbose_name='Row')
+    seat = models.PositiveIntegerField(blank=True, verbose_name='Seat')
+
+
+    def __str__(self):
+        return str(self.f_name) + ' ' + str(self.l_name)

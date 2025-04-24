@@ -1,9 +1,7 @@
 from django.contrib import admin
-from .models import Order, OrderItem, BookingDetails
+from .models import Order, OrderItem
 
-class BookingDetailsAdmin(admin.ModelAdmin):
-    list_display = ['l_name','f_name','email','phone','ticket_type','row','seat']
-    list_display_links = ('l_name','f_name')
+
 
 class OrderItemAdmin(admin.TabularInline):
     model = OrderItem
@@ -39,4 +37,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Order, OrderAdmin)
-admin.site.register(BookingDetails, BookingDetailsAdmin)
+
