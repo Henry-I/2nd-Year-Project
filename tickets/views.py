@@ -12,7 +12,9 @@ class TicketDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        order = Order.objects.filter(emailAddress=self.request.user.email).first()  
+        order = None
+        if self.request.user.is_authenticated:
+                order = Order.objects.filter(emailAddress=self.request.user.email).first()  
         context['order'] = order
         return context
 
@@ -76,16 +78,19 @@ class TicketsByEventView(DetailView):
         tickets = Ticket.objects.filter(event=event)
         context['tickets'] = tickets
         return context
-   
 
 def ticket_checkout(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
+
     if request.method == 'POST':
         form = BookingDetailsForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('cartapp:add_cart', ticket_id=ticket.id)
+        else:
+            return render(request, 'ticket_checkout.html', {'form': form, 'ticket': ticket})
+    
     else:
         form = BookingDetailsForm()
-    return render(request, 'ticket_checkout.html', {'form': form})
 
+    return render(request, 'ticket_checkout.html', {'form': form, 'ticket': ticket})

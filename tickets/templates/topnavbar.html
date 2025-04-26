@@ -1,40 +1,40 @@
 {% load static %}
-<div style="margin-bottom: 0;">
-    <header>
-        <nav>
-            <img src="{% static 'images/logo.png' %}" class="logo" alt="Logo" style="width: 15em; margin-right: 0%;">
-            <ul style="margin-left:0;">
-                <li><a href="{% url 'home' %}"><i class="bi bi-house"></i></a></li>
-                <li><a href="{% url 'contact' %}"><i class="bi bi-telephone"></i></a></li>
-                <li><a href="{% url 'about' %}"><i class="bi bi-info-circle"></i></a></li>
-                <li><a href="{% url 'ticket_list' %}"><i class="bi bi-bag"></i></a></li>
-            </ul>
-            <div class="container-fluid" style="width: 55%; margin-left: 0%; margin-right: 0em;">
-                <form class="d-flex" action="{% url 'search_app:searchResult' %}" method="get">
-                    <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search"
-                        style="border-radius: 2em; height: 3em;  margin-top: 2.5em;">
-                    <button class="btn btn-outline-light" type="submit" style="border-radius: 2em; margin-left: 0.5%; height: 3em; margin-top: 2.5em; background-color: #f8f9fa; color: #212529;">
-                        <i class="bi bi-search"></i>
-                </form>
-            </div>
-            <ul style="margin-right: 0%;">
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'cartapp:cart_detail' %}"><i class="bi bi-cart"></i>{% if item_count > 0 %} ({{ item_count }}){% endif%}</a></li>
-                <li><a href="{% url 'order:order_history' %}"><i class="bi bi-file-earmark-text"></i></a></li>
-                <li><a href="{% url 'accounts:update_profile' %}"><i class="bi bi-person"></i></a></li>
-                <li style="margin-top: 1.5%;">
-                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" style="background: none; border: none; color: inherit; font: inherit; cursor: pointer; padding: 0;">
-                            <i class="bi bi-box-arrow-right" style="padding: 1em;"></i>
-                        </button>
-                    </form>
-                </li>
-                {% else %}
-                <li><a href="{% url 'accounts:signup' %}"><i class="bi bi-person-plus"></i></a></li>
-                <li><a href="{% url 'accounts:login' %}"><i class="bi bi-door-open"></i></a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
-</div>
+<header style="margin: 0; padding: 0;">
+    <nav class="navbar" style="width: 95%; padding: 0.3em 2em; justify-content: space-between;">
+        <img src="{% static 'images/logo.png' %}" class="logo" alt="Logo" style="width: 12em;">
+
+        <ul style="list-style: none; display: flex; margin: 0; padding: 0; gap: 1.5em; align-items: center;">
+            <li><a href="{% url 'home' %}"><i class="bi bi-house fs-4"></i></a></li>
+            <li><a href="{% url 'contact' %}"><i class="bi bi-telephone fs-4"></i></a></li>
+            <li><a href="{% url 'about' %}"><i class="bi bi-info-circle fs-4"></i></a></li>
+            <li><a href="{% url 'ticket_list' %}"><i class="bi bi-bag fs-4"></i></a></li>
+        </ul>
+
+        <form class="d-flex" action="{% url 'search_app:searchResult' %}" method="get" style="flex: 1; max-width: 40%; margin: 0 2em;">
+            <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search"
+                style="border-radius: 2em; height: 2.5em; width: 100%;">
+            <button class="btn btn-outline-light" type="submit" style="border-radius: 2em; margin-left: 0.5em; background-color: #212529; height: 2.5em;">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+
+        <ul style="list-style: none; display: flex; margin: 0; padding: 0; gap: 1.5em; align-items: center;">
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'cartapp:cart_detail' %}"><i class="bi bi-cart fs-4"></i>{% if item_count > 0 %} ({{ item_count }}){% endif%}</a></li>
+        <li><a href="{% url 'order:order_history' %}"><i class="bi bi-file-earmark-text fs-4"></i></a></li>
+        <li><a href="{% url 'accounts:update_profile' %}"><i class="bi bi-person fs-4"></i></a></li>
+        <li>
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="background: none; border: none; color: inherit; padding: 0;">
+                    <i class="bi bi-box-arrow-right fs-4"></i>
+                </button>
+            </form>
+        </li>
+        {% else %}
+        <li><a href="{% url 'accounts:signup' %}"><i class="bi bi-person-plus fs-4"></i></a></li>
+        <li><a href="{% url 'accounts:login' %}"><i class="bi bi-door-open fs-4"></i></a></li>
+        {% endif %}
+        </ul>
+    </nav>
+</header>

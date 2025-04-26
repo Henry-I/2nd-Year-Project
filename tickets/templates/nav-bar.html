@@ -1,5 +1,5 @@
-<div class="navbar-dark bg-dark" style="text-align: center; padding: 1em;">
-    <ul class="d-flex justify-content-evenly" style="list-style: none; padding: 0; margin: 0;">
+<div class="navbar navbar-dark bg-dark" style="width: 100%; padding: 1em 0;">
+    <ul class="d-flex justify-content-evenly" style="list-style: none; width: 100%; margin: 0; padding: 0;">
         {% for eventtype in eventtype_list %}
             <li>
                 <a class="dropdown-item text-light" href="{% url 'events_by_eventtype' eventtype.pk %}">
