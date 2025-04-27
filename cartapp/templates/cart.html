@@ -71,25 +71,67 @@
             </table>
         </div>
         <div class="col-lg-4">
-            <div class="card shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Checkout</h5>
-                    <p class="lead">Total: <strong>€{{ total }}</strong></p>
-                    <a href="{% url 'ticket_list' %}" class="btn btn-secondary btn-lg w-100">Continue Shopping</a>
-                    <div>
+            <div class="card shadow-sm rounded-4 border-0" style="background: #f0f8ff;">
+                <div class="card-body text-center p-5">
+        
+                    <h5 class="card-title fw-bold mb-4" style="font-size: 2rem; color: #0056b3;">Checkout</h5>
+        
+                    <div class="table-responsive mb-4">
+                        <table class="table table-borderless">
+                            <tbody>
+                                {% if voucher %}
+                                <tr class="subtotal">
+                                    <td class="text-start text-secondary">Subtotal</td>
+                                    <td class="text-end text-secondary">€{{ total|floatformat:"2" }}</td>
+                                </tr>
+                                <tr class="voucher">
+                                    <td class="text-start text-success">
+                                        "{{ voucher.code }}" ({{ voucher.discount }}% Off)
+                                    </td>
+                                    <td class="text-end text-success">- €{{ discount|floatformat:"2" }}</td>
+                                </tr>
+                                <tr class="total border-top">
+                                    <td class="text-start fw-bold pt-3" style="font-size: 1.3rem;">Total</td>
+                                    <td class="text-end fw-bold pt-3" style="font-size: 1.3rem;">€{{ new_total|floatformat:"2" }}</td>
+                                </tr>
+                                {% else %}
+                                <tr class="total">
+                                    <td class="text-start fw-bold" style="font-size: 1.3rem;">Total</td>
+                                    <td class="text-end fw-bold" style="font-size: 1.3rem;">€{{ total|floatformat:"2" }}</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+        
+                    <div class="voucher-apply mb-4">
+                        <h5 class="card-title fw-bold mb-4" style="font-size: 1.5rem; color: #0056b3;">Have A Voucher?</h5>                        
+                        <form action="{% url 'vouchers:apply' %}" method="post" class="d-flex gap-2">
+                            {{ voucher_apply_form }}
+                            <button type="submit" class="btn btn-primary" style="background-color: #007bff; border: none;">Apply</button>
+                            {% csrf_token %}
+                        </form>
+                    </div>
+        
+                    <div class="d-grid gap-3">
+                        <a href="{% url 'ticket_list' %}" class="btn btn-outline-primary btn-lg rounded-3 py-2">Continue Shopping</a>
+        
                         <form action="{% url 'cartapp:cart_detail' %}" method="POST">
                             {% csrf_token %}
-                            <button class="btn btn-success btn-lg w-100 mt-2" type="submit">Pay By Card</button>
+                            <button class="btn btn-primary btn-lg rounded-3 py-2" type="submit" style="background-color: #007bff; border: none;">Pay By Card</button>
                         </form>
+        
                         {% if error %}
-                        <p style="color: red;">Error: {{ error }}</p>
+                        <div class="alert alert-danger mt-3" role="alert" style="font-size: 0.9rem;">
+                            Error: {{ error }}
+                        </div>
                         {% endif %}
-
                     </div>
-                    </form>
+        
                 </div>
             </div>
         </div>
+        
     </div>
     {% endif %}
 </div>

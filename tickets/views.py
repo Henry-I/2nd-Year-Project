@@ -42,7 +42,7 @@ class TicketPageView(ListView):
     model = Ticket
     template_name = 'tickets.html'  
     context_object_name = 'ticket_list'
-    paginate_by = 2
+    paginate_by = 4
 
 def delete_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
