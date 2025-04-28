@@ -3,6 +3,53 @@
 {% block title %}Contact Us - CrowdCast{% endblock %}
 
 {% block content %}
-<h1>Contact Information</h1>
-<p>Email us at: info@crowdcast.com</p>
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-light">Contact Us</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="text-light">Get in Touch</h3>
+            <p class="text-light">Have questions or need support? Reach out to us!</p>
+
+            <div class="mb-3">
+                <h5 class="text-light">Email</h5>
+                <p class="text-muted">You can email us directly at: <a href="mailto:info@crowdcast.com" class="text-info">info@crowdcast.com</a></p>
+            </div>
+
+            <div class="mb-3">
+                <h5 class="text-light">Phone</h5>
+                <p class="text-muted">Call us at: <strong>(123) 456-7890</strong></p>
+            </div>
+
+            <div class="mb-3">
+                <h5 class="text-light">Social Media</h5>
+                <ul class="list-unstyled d-flex">
+                    <li class="me-3"><a href="#" class="text-info"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li class="me-3"><a href="#" class="text-info"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#" class="text-info"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h3 class="text-light">Send Us a Message</h3>
+            <form method="post" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label text-light">Your Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label text-light">Your Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label text-light">Your Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

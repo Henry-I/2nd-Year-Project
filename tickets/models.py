@@ -33,6 +33,7 @@ class Ticket(models.Model):
     stock = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
+    description = models.TextField(blank=True, null=True)
     
     def __str__(self):
         return self.event_name

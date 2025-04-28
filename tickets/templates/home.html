@@ -5,54 +5,66 @@
 
 {% block content %}
 <div class="container mt-5">
-    <!-- Hero Carousel -->
-    <div class="mb-5">
-        <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                {% for ticket in tickets %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <a href="{% url 'ticket_detail' ticket.id %}">
-                            <img src="{{ ticket.image.url }}" class="d-block w-100 rounded" style="height: 450px; object-fit: cover;" alt="{{ ticket.event_name }}">
-                        </a>
-                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-                            <h5 class="text-white">{{ ticket.event_name }}</h5>
+    <div class="row">
+        <!-- Carousel Section -->
+        <div class="col-12">
+            <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    {% for ticket in tickets %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <a href="{% url 'ticket_detail' ticket.id %}">
+                                <img src="{{ ticket.image.url }}" class="d-block w-100 rounded shadow-lg" style="height: 450px; object-fit: cover;" alt="{{ ticket.event_name }}">
+                            </a>
+                            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                                <h5 class="text-white">{{ ticket.event_name }}</h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="text-center text-light mb-5">
+                <h1 class="display-4 fw-bold">Welcome to CrowdCast</h1>
+                <p class="lead">Where we make tickets to fit your wallet. Discover, book, and enjoy entertainment like never before.</p>
+            </div>
+
+            <section class="mb-5">
+                <h2 class="text-center text-white mb-4">Featured Events</h2>
+                <div class="row">
+                    {% for ticket in tickets %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card bg-dark text-white rounded-3 shadow-lg">
+                            <a href="{% url 'ticket_detail' ticket.id %}">
+                                <img src="{{ ticket.image.url }}" alt="{{ ticket.event_name }}" class="card-img-top rounded-3" style="height: 200px; object-fit: cover;">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title text-truncate" style="max-width: 200px;">{{ ticket.event_name }}</h5>
+                                {% if ticket.event.start_date %}
+                                    <p class="card-text text-muted">Starts: {{ ticket.event.start_date|date:"d M Y" }}</p>
+                                {% else %}
+                                    <p class="card-text text-muted">Date TBA</p>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-
-    <div class="text-center text-light mb-5">
-        <h1 class="display-4 fw-bold">Welcome to CrowdCast</h1>
-        <p class="lead">Where we make tickets to fit your wallet. Discover, book, and enjoy entertainment like never before.</p>
-    </div>
-
-    <section class="mb-5">
-        <h2 class="text-center text-white mb-4">Featured Events</h2>
-        <div class="row">
-            {% for ticket in tickets|slice:":3" %}
-            <div class="col-md-4 mb-4">
-                <div class="card bg-dark text-white shadow-sm h-100">
-                    <img src="{{ ticket.image.url }}" class="card-img-top" style="height: 220px; object-fit: cover;" alt="{{ ticket.event_name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ ticket.event_name }}</h5>
-                        <p class="card-text">{{ ticket.description|truncatewords:20 }}</p>
-                        <a href="{% url 'ticket_detail' ticket.id %}" class="btn btn-primary mt-2">View Details</a>
-                    </div>
+                    {% endfor %}
                 </div>
-            </div>
-            {% endfor %}
+            </section>
         </div>
-    </section>
+    </div>
+
     {% if user.is_not_authenticated %}
         <section class="text-center py-5" style="background: linear-gradient(to right, #007bff, #6610f2); border-radius: 15px;">
             <h2 class="text-white mb-3">Don't Miss Out!</h2>
@@ -62,4 +74,3 @@
     {% endif %}
 </div>
 {% endblock %}
-
