@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, login
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.edit import UpdateView, CreateView
-from .forms import UserChangeForm, CustomUserCreationForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 from django.shortcuts import render
 from django.contrib.auth.models import Group
 from .models import CustomUser
@@ -26,7 +26,7 @@ class SignUpView(CreateView):
 
 class UpdateProfileView(UpdateView):
     model = get_user_model()
-    form_class = UserChangeForm
+    form_class = CustomUserChangeForm
     template_name = 'registration/update_profile.html'
     success_url = reverse_lazy('accounts:update_profile')
 

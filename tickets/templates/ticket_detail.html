@@ -25,6 +25,11 @@
                     </a>
                     
                     {% endif %}
+
+                    <div class="mt-4">
+                        <h5 class="fw-bold">Event Description</h5>
+                        <p class="card-text">{{ ticket.description|default:"No description available." }}</p>
+                    </div>
                 </div>
             </div>
         </div>
